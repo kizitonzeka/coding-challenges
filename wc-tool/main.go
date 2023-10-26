@@ -46,13 +46,17 @@ func main() {
 		}
 		fmt.Printf("%d\t%s", totalChars, *chars)
 	default:
+		if len(flag.Args()) > 0 {
+			fileName := flag.Arg(0)
+			file := &fileName
+			totalLines, _ := countLines(file)
+			totalWords, _ := countWords(file)
+			totalBytes, _ := countBytes(file)
+			fmt.Printf("%d\t%d\t%d\t%s", totalLines, totalWords, totalBytes, fileName)
+		} else {
+			flag.PrintDefaults()
+		}
 
-		fileName := flag.Arg(0)
-		file := &fileName
-		totalLines, _ := countLines(file)
-		totalWords, _ := countWords(file)
-		totalBytes, _ := countBytes(file)
-		fmt.Printf("%d\t%d\t%d\t%s", totalLines, totalWords, totalBytes, fileName)
 	}
 
 }
